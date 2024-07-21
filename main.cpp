@@ -1,79 +1,74 @@
-//Start
+#include <iostream>
+using namespace std;
+// Pseudocode PLD Chapter 6 #2a & 2b, pg. 267
+// Start
 // Declarations
-// num SIZE = 5
-// num COFFEEPRICE = 2.00
-// string products[SIZE]="Whipped cream", "Cinnamon", "Chocolate
-//sauce", "Amaretto", ""Irish whiskey"
-// num prices[SIZE]=0.89, 0.25, 0.59, 1.50, 1.75
-// num totalPrice = 0
-// num choice = 0
+// num SIZE = 12
+// num numbers[SIZE]
+// num value = 0
+// num counter = 0
+// num total = 0
+// num average = 0
+// num diffFromAvg = 0
 // num SENTINEL = -1
 //
-// while (choice <> SENTINEL))
-// output "Please select an item from the Product menu by selecting
-//the item number (1 - 5) or -1 to terminate: "
-// output "Product Price ($)"
-// output "======= ========="
-// output "1. Whipped cream 0.89"
-// output "2. Cinnamon 0.25"
-// output "3. Chocolate sauce 0.59"
-// output "4. Amaretto 1.50"
-// output "5. Irish whiskey 1.75"
 // output "Please enter a positive number: "
-// input choice
-// if (choice <> -1) then
-// if ((choice >= 1) and (choice <= 5)) then
-// totalPrice = totalPrice + prices[choice-1]
-// output "Item number ", choice,": ", products[choice-1], " has
-//been added"
-// else
-// output "Item number ",choice, " is not valid", "Sorry we do
-//not carry that item"
-// endif
+// input value
+// while ((counter < SIZE) AND (value <> SENTINEL) )
+// total = total + value
+// numbers[counter] = value
+// counter = counter + 1
+// if (counter <> SIZE)
+// output "Please enter a positive number: "
+// input value
 // endif
 // endwhile
-// totalPrice = totalPrice + COFFEEPRICE
-// output "Total price of order is ",totalPrice
-// output "Thanks for purchasing from Jumpin Jive Coffee Shop"
+//
+// if (counter > 0) then
+// average = total/counter
+// for i = 0 to counter - 1
+// diffFromAvg = numbers[i] - average
+// output "Number[",i,"]: ",numbers[i]," Difference from Average
+//    is ",diffFromAvg
+// endfor
+// else
+// output "Processing incomplete. No values in the array."
+// endif
 // Stop
-#include <iostream>
-#include <string>
-
-using namespace std;
-
 int main() {
-    const int SIZE = 5;
-    const double COFFEEPRICE = 2.00;
-    string products[SIZE] = {"Whipped cream", "Cinnamon", "Chocolate sauce", "Amaretto", "Irish whiskey"};
-    double prices[SIZE] = {0.89, 0.25, 0.59, 1.50, 1.75};
-    double totalPrice = 0;
-    int choice = 0;
+
+    const int SIZE = 12;
+    int numbers[SIZE];
+    int value = 0;
+    //had to change counter to count because my IDE would not run the code otherwise
+    int count = 0;
+    int total = 0;
+    int average = 0;
+    int diffFromAvg = 0;
     const int SENTINEL = -1;
 
-    while (choice != SENTINEL){
-        cout << "Please select an item from the Product menu by selecting the item number (1 - 5) or -1 to terminate: " << endl;
-        cout << "Product Price ($)" << endl;
-        cout << "======= =========" << endl;
-        cout << "1. Whipped cream 0.89" << endl;
-        cout << "2. Cinnamon 0.25" << endl;
-        cout << "3. Chocolate sauce 0.59" << endl;
-        cout << "4. Amaretto 1.50" << endl;
-        cout << "5. Irish whiskey 1.75" << endl;
-        cout << "Please enter a positive number: " << endl;
-        cin >> choice;
-        if (choice != -1){
-            if ((choice >= 1) && (choice <= 5)){
-                totalPrice = totalPrice + prices[choice-1];
-                cout << "Item number " << choice << ": " << products[choice-1] << " has been added" << endl;
-            } else {
-                cout << "Item number " << choice << " is not valid. Sorry we do not carry that item." << endl;
-            }
+    cout << "Please enter a positive integer: " << endl;
+    cin >> value;
+
+    while (count < SIZE && value != SENTINEL) {
+        total = total + value;
+        numbers[count] = value;
+        count = count + 1;
+        if (count != SIZE) {
+            cout << "Please enter a positive number: " << endl;
+            cin >> value;
         }
     }
 
-    totalPrice = totalPrice + COFFEEPRICE;
-    cout << "Total price of order is " << totalPrice << endl;
-    cout << "Thanks for purchasing from Jumpin Jive Coffee Shop" << endl;
+    if (count > 0){
+        average = total/count;
+        for (int i = 0; i < count; ++i){
+            diffFromAvg = numbers[i] - average;
+            cout << "Number [" << i << "]: " << numbers[i] << "diffeence from average is: " << diffFromAvg << endl;
+        }
+    } else{
+        cout << "Processing incomplete. No values in the array." << endl;
+    }
 
     return 0;
 }
